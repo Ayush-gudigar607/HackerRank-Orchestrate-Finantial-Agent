@@ -58,3 +58,10 @@ export interface ImageRecord {
   related_event_id: string;
   image_path: string;
 }
+
+export interface ExchangeRate {
+  rate_date: string;
+  from_currency: string;
+  to_currency: string;
+  rate: number;
+}
