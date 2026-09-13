@@ -65,3 +65,13 @@ export interface ExchangeRate {
   to_currency: string;
   rate: number;
 }
+
+export interface Dataset{
+  requests: Request[];
+  profiles: FinancialProfile[];
+  events: FinancialEvent[];
+  paymentOptions: PaymentOption[];
+  messages: Message[];
+  images: ImageRecord[];
+  exchangeRates: ExchangeRate[];
+}
