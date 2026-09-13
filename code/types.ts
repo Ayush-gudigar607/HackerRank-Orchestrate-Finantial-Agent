@@ -5,7 +5,6 @@ export interface Request {
   user_id: string;
   request_date: string;
   request_type: string;
-  request_status: string;
   requested_amount: number;
   desired_completion_date: string;
   allows_partial_payment: boolean;
@@ -28,12 +27,18 @@ export interface FinancialProfile {
 export interface FinancialEvent {
   event_id: string;
   user_id: string;
-  event_date: string;
   event_type: string;
+  description: string;
+  category: string;
+  direction: string;
   amount: number | null;
   currency: string;
+  event_date: string;
+  settlement_date: string;
   status: string;
   linked_event_id: string;
+  flexibility: string;
+  minimum_allowed_amount: number | null;
 }
 
 export interface PaymentOption {
@@ -53,7 +58,8 @@ export interface Message {
   user_id: string;
   request_id: string;
   related_event_id: string;
-  message_date: string;
+  sent_at: string;
+  source_type: string;
   message_text: string;
 }
 
@@ -62,7 +68,6 @@ export interface ImageRecord {
   user_id: string;
   request_id: string;
   related_event_id: string;
-  image_path: string;
 }
 
 export interface ExchangeRate {
@@ -72,7 +77,7 @@ export interface ExchangeRate {
   rate: number;
 }
 
-export interface Dataset{
+export interface Dataset {
   requests: Request[];
   profiles: FinancialProfile[];
   events: FinancialEvent[];

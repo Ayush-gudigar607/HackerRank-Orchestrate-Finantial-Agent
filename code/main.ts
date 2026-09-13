@@ -70,7 +70,7 @@ async function main() {
     process.env.DATASET_DIR ?? "./dataset";
 
   const outputPath =
-  process.env.OUTPUT_PATH ?? "./output-test.csv";
+    process.env.OUTPUT_PATH ?? "./output.csv";
 
   console.log("Loading dataset...");
 

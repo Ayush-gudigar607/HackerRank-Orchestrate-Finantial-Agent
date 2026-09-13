@@ -1,5 +1,6 @@
 import type { FinancialState } from "./finantial-state";
 import type { FinancialEvent } from "./types";
+import { simulatePayment } from "./forecast";
 
 export interface SpendingChange {
   action: "stop" | "reduce_to";
@@ -14,40 +15,53 @@ export interface SpendingPlan {
 }
 
 /**
- * Check whether an event is a flexible expense that can be changed.
+ * Check whether an event is a protected expense category.
  */
-function isFlexibleExpense(
+function isProtectedCategory(
   state: FinancialState,
   event: FinancialEvent,
 ): boolean {
+  const protectedCategories =
+    state.profile.expense_categories_to_protect
+      .split(/[|,;]/)
+      .map((value) => value.trim().toLowerCase())
+      .filter(Boolean);
+
+  const category = event.category.trim().toLowerCase();
+  const eventType = event.event_type.trim().toLowerCase();
+
+  return protectedCategories.some(
+    (item) =>
+      category.includes(item) || eventType.includes(item),
+  );
+}
+
+/**
+ * Check whether an event is income (should never be changed).
+ */
+function isIncomeEvent(event: FinancialEvent): boolean {
+  const direction = event.direction.trim().toLowerCase();
+  if (direction === "credit") return true;
+
   const type = event.event_type.trim().toLowerCase();
-
-  if (type.includes("income")) return false;
-  if (type.includes("salary")) return false;
-  if (type.includes("deposit")) return false;
-  if (type.includes("refund")) return false;
-
-  /*
-   * Only categories explicitly mentioned by the user
-   * as reducible/stoppable should be considered.
-   */
-  const reducible =
-    state.profile.expense_categories_user_is_willing_to_reduce
-      .split(/[|,;]/)
-      .map((value) => value.trim().toLowerCase())
-      .filter(Boolean);
-
-  const stoppable =
-    state.profile.expense_categories_user_is_willing_to_stop
-      .split(/[|,;]/)
-      .map((value) => value.trim().toLowerCase())
-      .filter(Boolean);
-
-  const category = type;
-
   return (
-    reducible.some((item) => category.includes(item)) ||
-    stoppable.some((item) => category.includes(item))
+    type.includes("income") ||
+    type.includes("salary") ||
+    type.includes("deposit") ||
+    type.includes("refund")
+  );
+}
+
+/**
+ * Check whether an event is a one-time expense (not recurring).
+ * Only recurring/flexible expenses should be changed.
+ */
+function isRecurringFlexible(event: FinancialEvent): boolean {
+  const flexibility = event.flexibility.trim().toLowerCase();
+  return (
+    flexibility === "stoppable" ||
+    flexibility === "reducible" ||
+    flexibility === "flexible"
   );
 }
 
@@ -58,15 +72,23 @@ function canStopEvent(
   state: FinancialState,
   event: FinancialEvent,
 ): boolean {
+  if (event.flexibility.trim().toLowerCase() !== "stoppable") {
+    return false;
+  }
+
   const stoppable =
     state.profile.expense_categories_user_is_willing_to_stop
       .split(/[|,;]/)
       .map((value) => value.trim().toLowerCase())
       .filter(Boolean);
 
-  const category = event.event_type.trim().toLowerCase();
+  const category = event.category.trim().toLowerCase();
+  const eventType = event.event_type.trim().toLowerCase();
 
-  return stoppable.some((item) => category.includes(item));
+  return stoppable.some(
+    (item) =>
+      category.includes(item) || eventType.includes(item),
+  );
 }
 
 /**
@@ -76,22 +98,61 @@ function canReduceEvent(
   state: FinancialState,
   event: FinancialEvent,
 ): boolean {
+  const flexibility = event.flexibility.trim().toLowerCase();
+  if (flexibility !== "reducible" && flexibility !== "flexible") {
+    return false;
+  }
+
   const reducible =
     state.profile.expense_categories_user_is_willing_to_reduce
       .split(/[|,;]/)
       .map((value) => value.trim().toLowerCase())
       .filter(Boolean);
 
-  const category = event.event_type.trim().toLowerCase();
+  const category = event.category.trim().toLowerCase();
+  const eventType = event.event_type.trim().toLowerCase();
 
-  return reducible.some((item) => category.includes(item));
+  return reducible.some(
+    (item) =>
+      category.includes(item) || eventType.includes(item),
+  );
+}
+
+/**
+ * Check if an event can be changed (flexible and allowed by user).
+ */
+function canBeChanged(
+  state: FinancialState,
+  event: FinancialEvent,
+): boolean {
+  // Never change income
+  if (isIncomeEvent(event)) return false;
+
+  // Never change protected categories
+  if (isProtectedCategory(state, event)) return false;
+
+  // Must be recurring/flexible
+  if (!isRecurringFlexible(event)) return false;
+
+  // Must be in user's allowed change categories
+  return (
+    canStopEvent(state, event) ||
+    canReduceEvent(state, event)
+  );
 }
 
 /**
  * Create a spending-change plan.
  *
- * This function only considers expenses that the user has
- * explicitly said can be stopped or reduced.
+ * For every candidate spending-change plan:
+ * 1. Apply the changes
+ * 2. Simulate the requested payment
+ * 3. Run the complete 90-day forecast
+ * 4. Verify minimum balance on every day
+ *
+ * Maximum 3 changes allowed.
+ * The same event cannot be both stopped and reduced.
+ * Prefer fewer changes where possible.
  */
 export function createSpendingPlan(
   state: FinancialState,
@@ -105,10 +166,19 @@ export function createSpendingPlan(
     };
   }
 
+  // Collect unique candidate events (deduplicate by description+category
+  // to avoid showing the same recurring event multiple times)
+  const seen = new Set<string>();
   const candidates = state.events
     .filter((event) => event.amount !== null)
     .filter((event) => event.amount! > 0)
     .filter((event) => canBeChanged(state, event))
+    .filter((event) => {
+      const key = `${event.category}|${event.description}`;
+      if (seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    })
     .sort((a, b) => {
       const amountA = a.amount ?? 0;
       const amountB = b.amount ?? 0;
@@ -124,9 +194,8 @@ export function createSpendingPlan(
   let totalSavings = 0;
 
   for (const event of candidates) {
-    if (totalSavings >= requiredSavings) {
-      break;
-    }
+    if (changes.length >= 3) break;
+    if (totalSavings >= requiredSavings) break;
 
     const amount = event.amount!;
 
@@ -148,64 +217,58 @@ export function createSpendingPlan(
      */
     if (canReduceEvent(state, event)) {
       const needed = requiredSavings - totalSavings;
+      const minAllowed = event.minimum_allowed_amount ?? 0;
 
       const newAmount = Math.max(
-        0,
+        minAllowed,
         amount - needed,
       );
 
       const savings = amount - newAmount;
 
-      changes.push({
-        action: "reduce_to",
-        eventId: event.event_id,
-        newAmount,
-      });
+      if (savings > 0) {
+        changes.push({
+          action: "reduce_to",
+          eventId: event.event_id,
+          newAmount,
+        });
 
-      totalSavings += savings;
+        totalSavings += savings;
+      }
     }
   }
 
-  /*
-   * Maximum three spending changes are allowed.
-   */
-  const limitedChanges = changes.slice(0, 3);
+  // Verify the spending plan is actually safe by simulating
+  if (changes.length > 0) {
+    const stoppedEvents = new Set<string>();
+    const reducedEvents = new Map<string, number>();
 
-  const limitedSavings = limitedChanges.reduce(
-    (total, change) => {
-      const event = state.events.find(
-        (item) => item.event_id === change.eventId,
-      );
-
-      if (!event || event.amount === null) {
-        return total;
-      }
-
+    for (const change of changes) {
       if (change.action === "stop") {
-        return total + event.amount;
+        stoppedEvents.add(change.eventId);
+      } else if (change.action === "reduce_to") {
+        reducedEvents.set(change.eventId, change.newAmount ?? 0);
       }
+    }
 
-      return (
-        total +
-        Math.max(
-          0,
-          event.amount - (change.newAmount ?? event.amount),
-        )
-      );
-    },
-    0,
-  );
+    const simResult = simulatePayment(
+      state,
+      state.request.request_date,
+      state.request.requested_amount,
+      stoppedEvents,
+      reducedEvents,
+    );
+
+    return {
+      changes,
+      totalSavings,
+      isSafe: simResult.safe,
+    };
+  }
 
   return {
-    changes: limitedChanges,
-    totalSavings: limitedSavings,
-    isSafe: limitedSavings >= requiredSavings,
+    changes,
+    totalSavings,
+    isSafe: totalSavings >= requiredSavings,
   };
-}
-
-function canBeChanged(
-  state: FinancialState,
-  event: FinancialEvent,
-): boolean {
-  return isFlexibleExpense(state, event);
 }

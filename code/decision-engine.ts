@@ -83,56 +83,83 @@ function buildExplanation(
     affordability.amountSafeToPay,
   );
 
+  const minBalance = formatAmount(
+    state.profile.minimum_balance_to_keep,
+  );
+
+  const currency = state.profile.currency;
+
   switch (status) {
     case "affordable_now":
       return (
-        `The requested amount of ${requested} is affordable on ` +
-        `${state.request.request_date} while maintaining the ` +
-        `required minimum balance.`
+        `Pay ${currency} ${requested} today. ` +
+        `This keeps the ${currency} ${minBalance} minimum available over the next 90 days.`
       );
 
     case "affordable_with_plan":
       if (paymentPlan.paymentMethod === "partial_payment") {
         return (
-          `The full amount of ${requested} is not safely payable today. ` +
-          `However, ${safeToday} can be paid today and the remaining ` +
-          `amount can be paid later within the requested completion date.`
+          `The full amount of ${currency} ${requested} is not safely payable today. ` +
+          `However, ${currency} ${safeToday} can be paid today and the remaining ` +
+          `amount can be paid on ${paymentPlan.earliestFullPaymentDate} within the requested completion date.`
         );
       }
 
       if (paymentPlan.paymentMethod === "installments") {
+        const numPayments = paymentPlan.payments.length;
+        const perPayment = formatAmount(
+          paymentPlan.payments[0]?.amount ?? 0,
+        );
+        const startDate = paymentPlan.payments[0]?.date ?? "";
         return (
-          `The full amount of ${requested} is not safely payable today, ` +
-          `but a safe installment plan is available within the user's ` +
-          `payment preferences.`
+          `Use ${numPayments} installments of ${currency} ${perPayment}, ` +
+          `starting ${startDate}. ` +
+          `This leaves at least ${currency} ${minBalance} available.`
+        );
+      }
+
+      if (paymentPlan.paymentMethod === "full_payment") {
+        if (spendingPlan.changes.length > 0) {
+          const changesDesc = spendingPlan.changes
+            .map((c) => {
+              if (c.action === "stop") return `stop ${c.eventId}`;
+              return `reduce ${c.eventId} to ${formatAmount(c.newAmount ?? 0)}`;
+            })
+            .join(", ");
+          return (
+            `After spending changes (${changesDesc}), pay ${currency} ${requested} today. ` +
+            `This leaves at least ${currency} ${minBalance} available.`
+          );
+        }
+        return (
+          `Pay ${currency} ${requested} today with the selected plan. ` +
+          `This keeps the ${currency} ${minBalance} minimum available.`
         );
       }
 
       return (
         `The request is affordable using the selected payment plan ` +
-        `while maintaining the required minimum balance.`
+        `while maintaining the required minimum balance of ${currency} ${minBalance}.`
       );
 
     case "affordable_later":
       return (
-        `The requested amount of ${requested} is not safely payable today, ` +
-        `but the forecast shows that the full amount becomes affordable ` +
-        `on ${paymentPlan.earliestFullPaymentDate ?? "a later date"}.`
+        `Pay ${currency} ${requested} in full on ${paymentPlan.earliestFullPaymentDate ?? "a later date"}. ` +
+        `Paying earlier would take the balance below the ${currency} ${minBalance} minimum.`
       );
 
     case "not_affordable":
       if (spendingPlan.changes.length > 0) {
         return (
-          `The requested amount of ${requested} cannot be safely paid ` +
+          `The requested amount of ${currency} ${requested} cannot be safely paid ` +
           `under the available payment options. Optional spending changes ` +
           `were considered, but they do not produce a safe eligible plan.`
         );
       }
 
       return (
-        `The requested amount of ${requested} cannot be safely paid ` +
-        `under the available payment options while maintaining the ` +
-        `required minimum balance.`
+        `Do not make this payment. ` +
+        `None of the available options keeps the ${currency} ${minBalance} minimum protected.`
       );
   }
 }
@@ -147,22 +174,31 @@ export function makeDecision(
 
   let status: AffordabilityStatus;
 
-  switch (paymentPlan.paymentMethod) {
-    case "full_payment":
-      status = "affordable_now";
-      break;
+  if (!paymentPlan.isSafe) {
+    status = "not_affordable";
+  } else {
+    switch (paymentPlan.paymentMethod) {
+      case "full_payment":
+        // Check if it requires spending changes
+        if (spendingPlan.changes.length > 0 && spendingPlan.isSafe) {
+          status = "affordable_with_plan";
+        } else {
+          status = "affordable_now";
+        }
+        break;
 
-    case "partial_payment":
-    case "installments":
-      status = "affordable_with_plan";
-      break;
+      case "partial_payment":
+      case "installments":
+        status = "affordable_with_plan";
+        break;
 
-    case "wait":
-      status = "affordable_later";
-      break;
+      case "wait":
+        status = "affordable_later";
+        break;
 
-    default:
-      status = "not_affordable";
+      default:
+        status = "not_affordable";
+    }
   }
 
   /*
@@ -177,16 +213,17 @@ export function makeDecision(
     ),
   );
 
-  /*
-   * If the payment plan says it is unsafe,
-   * force the final decision to not_recommended.
-   */
-  if (!paymentPlan.isSafe) {
-    status = "not_affordable";
-  }
-
   const earliestDate =
     paymentPlan.earliestFullPaymentDate ?? "";
+
+  // For affordable_now, earliest date must be request_date
+  const finalEarliestDate =
+    status === "affordable_now"
+      ? state.request.request_date
+      : earliestDate;
+
+  // For not_recommended, payment_plan must be "none"
+  const isRecommended = paymentPlan.isSafe;
 
   return {
     request_id: state.request.request_id,
@@ -197,20 +234,22 @@ export function makeDecision(
     affordability_status: status,
 
     recommended_payment_method:
-      paymentPlan.isSafe
+      isRecommended
         ? paymentPlan.paymentMethod
         : "not_recommended",
 
     payment_plan:
-      paymentPlan.isSafe
+      isRecommended
         ? formatPaymentPlan(paymentPlan.payments)
         : "none",
 
     earliest_date_for_full_payment:
-      earliestDate,
+      finalEarliestDate,
 
     spending_changes_needed:
-      formatSpendingChanges(spendingPlan),
+      spendingPlan.isSafe && spendingPlan.changes.length > 0
+        ? formatSpendingChanges(spendingPlan)
+        : "none",
 
     decision_explanation:
       buildExplanation(

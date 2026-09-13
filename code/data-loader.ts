@@ -20,7 +20,12 @@ function parseCSVLine(line: string): string[] {
     const char = line[i];
 
     if (char === '"') {
-      insideQuotes = !insideQuotes;
+      if (insideQuotes && i + 1 < line.length && line[i + 1] === '"') {
+        current += '"';
+        i++;
+      } else {
+        insideQuotes = !insideQuotes;
+      }
     } else if (char === "," && !insideQuotes) {
       result.push(current);
       current = "";
@@ -31,10 +36,10 @@ function parseCSVLine(line: string): string[] {
 
   result.push(current);
 
-  return result.map((value) => value.trim().replace(/^"|"$/g, ""));
+  return result.map((value) => value.trim());
 }
 
-//this will retuen the row
+//this will return the row
 async function readCSV(path: string): Promise<Record<string, string>[]> {
   const content = await readFile(path, "utf-8");
 
@@ -105,7 +110,6 @@ export async function loadDataset(datasetDir: string): Promise<Dataset> {
     user_id: row.user_id!,
     request_date: row.request_date!,
     request_type: row.request_type!,
-    request_status: row.request_status!,
     requested_amount: number(row.requested_amount!),
     desired_completion_date: row.desired_completion_date!,
     allows_partial_payment: boolean(row.allows_partial_payment!),
@@ -131,12 +135,18 @@ export async function loadDataset(datasetDir: string): Promise<Dataset> {
     const events: FinancialEvent[] = rawEvents.map(row => ({
     event_id: row.event_id!,
     user_id: row.user_id!,
-    event_date: row.event_date!,
     event_type: row.event_type!,
+    description: row.description ?? "",
+    category: row.category ?? "",
+    direction: row.direction ?? "",
     amount: numberOrNull(row.amount!),
     currency: row.currency!,
+    event_date: row.event_date!,
+    settlement_date: row.settlement_date ?? "",
     status: row.status!,
-    linked_event_id: row.linked_event_id!,
+    linked_event_id: row.linked_event_id ?? "",
+    flexibility: row.flexibility ?? "",
+    minimum_allowed_amount: numberOrNull(row.minimum_allowed_amount ?? ""),
   }));
 
    const paymentOptions: PaymentOption[] =
@@ -155,18 +165,18 @@ export async function loadDataset(datasetDir: string): Promise<Dataset> {
     const messages: Message[] = rawMessages.map(row => ({
     message_id: row.message_id!,
     user_id: row.user_id!,
-    request_id: row.request_id!,
-    related_event_id: row.related_event_id!,
-    message_date: row.message_date!,
+    request_id: row.request_id ?? "",
+    related_event_id: row.related_event_id ?? "",
+    sent_at: row.sent_at ?? "",
+    source_type: row.source_type ?? "",
     message_text: row.message_text!,
   }));
 
   const images: ImageRecord[] = rawImages.map(row => ({
     image_id: row.image_id!,
     user_id: row.user_id!,
-    request_id: row.request_id!,
-    related_event_id: row.related_event_id!,
-    image_path: row.image_path!,
+    request_id: row.request_id ?? "",
+    related_event_id: row.related_event_id ?? "",
   }));
 
   const exchangeRates: ExchangeRate[] =

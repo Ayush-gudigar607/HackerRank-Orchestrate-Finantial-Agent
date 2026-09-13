@@ -10,6 +10,7 @@ import type {
   ImageRecord,
   ExchangeRate,
 } from "./types";
+import { applyMessageEffects } from "./message-interpreter";
 
 export interface FinancialState {
   request: Request;
@@ -69,10 +70,13 @@ export function buildFinancialState(
       ),
   );
 
+  // Apply message effects to events (Req #3 & #10)
+  const modifiedEvents = applyMessageEffects(events, messages);
+
   return {
     request,
     profile,
-    events,
+    events: modifiedEvents,
     paymentOptions,
     messages,
     images,
@@ -97,4 +101,3 @@ export function getImageForEvent(
     (image) => image.related_event_id === eventId,
   );
 }
-
