@@ -1,4 +1,8 @@
-import { writeFile } from "node:fs/promises";
+import {
+  rename,
+  rm,
+  writeFile,
+} from "node:fs/promises";
 
 import { loadDataset } from "./data-loader";
 import { buildFinancialState } from "./finantial-state";
@@ -63,6 +67,43 @@ function createCSV(
   }
 
   return lines.join("\n") + "\n";
+}
+
+async function writeOutput(
+  outputPath: string,
+  csv: string,
+): Promise<void> {
+  const tempPath = `${outputPath}.${process.pid}.tmp`;
+
+  await writeFile(tempPath, csv, "utf-8");
+
+  try {
+    // Windows applications such as Excel can briefly retain a handle after
+    // closing the file. Retry the replacement without ever exposing a
+    // partially written output.csv.
+    for (let attempt = 0; attempt < 5; attempt += 1) {
+      try {
+        await rename(tempPath, outputPath);
+        return;
+      } catch (error) {
+        if (
+          attempt === 4 ||
+          !(
+            error &&
+            typeof error === "object" &&
+            "code" in error &&
+            (error.code === "EBUSY" || error.code === "EPERM")
+          )
+        ) {
+          throw error;
+        }
+
+        await Bun.sleep(250 * (attempt + 1));
+      }
+    }
+  } finally {
+    await rm(tempPath, { force: true });
+  }
 }
 
 async function main() {
@@ -215,11 +256,7 @@ results.push(decision);
 
   const csv = createCSV(results);
 
-  await writeFile(
-    outputPath,
-    csv,
-    "utf-8",
-  );
+  await writeOutput(outputPath, csv);
 
   console.log("");
   console.log(
