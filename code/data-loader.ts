@@ -27,6 +27,7 @@ function parseCSVLine(line: string): string[] {
 }
 
 
+//this will retuen the row
 export async function readCSV(path: string): Promise<Record<string, string>[]> {
   const content = await readFile(path, "utf-8");
 
