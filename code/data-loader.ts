@@ -133,7 +133,7 @@ export async function loadDataset(datasetDir: string): Promise<Dataset> {
     user_id: row.user_id!,
     event_date: row.event_date!,
     event_type: row.event_type!,
-    amount: number(row.amount!),
+    amount: numberOrNull(row.amount!),
     currency: row.currency!,
     status: row.status!,
     linked_event_id: row.linked_event_id!,
