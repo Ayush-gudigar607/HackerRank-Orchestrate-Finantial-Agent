@@ -27,7 +27,7 @@ git clone https://github.com/interviewstreet/hackerrank-orchestrate-september26.
 cd hackerrank-orchestrate-september26
 ```
 
-Build your solution in `code/main.py`, or use another language and document its entry point clearly.
+The supplied solution is TypeScript and runs with Bun from `code/main.ts`.
 
 Your solution must:
 
@@ -35,10 +35,16 @@ Your solution must:
 - Generate one prediction for every request
 - Write the final predictions to `output.csv` in the repository root
 
-Run the starter Python entry point with:
+Install Bun, then generate the complete output with:
 
 ```bash
-python3 code/main.py
+bun run code/main.ts
+```
+
+Validate the generated artifact with:
+
+```bash
+bun run code/verify-output.ts
 ```
 
 After running your solution, confirm that `output.csv` exists in the repository root and contains the required columns and one row for every request.
