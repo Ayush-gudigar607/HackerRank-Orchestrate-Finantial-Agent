@@ -1,5 +1,15 @@
 /**Read all csv files correctly */
-import  {readFile} from "node:fs/promises";
+import { readFile } from "node:fs/promises";
+import type {
+  Dataset,
+  Request,
+  FinancialProfile,
+  FinancialEvent,
+  PaymentOption,
+  Message,
+  ImageRecord,
+  ExchangeRate,
+} from "./types";
 
 function parseCSVLine(line: string): string[] {
   const result: string[] = [];
@@ -21,19 +31,14 @@ function parseCSVLine(line: string): string[] {
 
   result.push(current);
 
-  return result.map(value =>
-    value.trim().replace(/^"|"$/g, "")
-  );
+  return result.map((value) => value.trim().replace(/^"|"$/g, ""));
 }
 
-
 //this will retuen the row
-export async function readCSV(path: string): Promise<Record<string, string>[]> {
+async function readCSV(path: string): Promise<Record<string, string>[]> {
   const content = await readFile(path, "utf-8");
 
-  const lines = content
-    .split(/\r?\n/)
-    .filter(line => line.trim().length > 0);
+  const lines = content.split(/\r?\n/).filter((line) => line.trim().length > 0);
 
   if (lines.length === 0) {
     return [];
@@ -41,7 +46,7 @@ export async function readCSV(path: string): Promise<Record<string, string>[]> {
 
   const headers = parseCSVLine(lines[0]!);
 
-  return lines.slice(1).map(line => {
+  return lines.slice(1).map((line) => {
     const values = parseCSVLine(line);
 
     const row: Record<string, string> = {};
@@ -52,4 +57,17 @@ export async function readCSV(path: string): Promise<Record<string, string>[]> {
 
     return row;
   });
+}
+
+function numberOrNull(value: string): number | null {
+  if (value.trim() === "") {
+    return null;
+  }
+  const number= Number(value);
+  if (Number.isNaN(number)) {
+    throw new Error(`Invalid number: "${value}"`);
+  }
+
+  return number;
+
 }
