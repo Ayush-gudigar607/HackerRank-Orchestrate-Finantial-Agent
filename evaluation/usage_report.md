@@ -7,11 +7,11 @@ This report summarizes the **final full-dataset run** that produced the submitte
 
 | Metric | Value |
 | --- | ---: |
-| Run started (UTC) | 2026-09-13T09:14:51.299Z |
-| Run finished (UTC) | 2026-09-13T09:14:52.605Z |
+| Run started (UTC) | 2026-09-13T11:51:09Z |
+| Run finished (UTC) | 2026-09-13T11:51:18Z |
 | Dataset used | ./dataset |
 | Requests processed | 250 |
-| Output CSV | ./output-run.csv |
+| Output CSV | ./output-final.csv |
 
 ## Provider and Model Information
 

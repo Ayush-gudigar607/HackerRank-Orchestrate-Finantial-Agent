@@ -108,7 +108,7 @@ async function main() {
         );
 
       // 4. Create the best available payment plan.
-      const paymentPlan =
+      let paymentPlan =
         createPaymentPlan(
           state,
           forecast,
@@ -128,6 +128,26 @@ async function main() {
           state,
           requiredSavings,
         );
+
+      // A spending-change recommendation is a real candidate only after its
+      // complete forecast simulation succeeds. Prefer an ordinary plan that
+      // completes by the requested deadline; otherwise a safe full payment
+      // today with the permitted changes is better than waiting past it.
+      const completesByDeadline =
+        paymentPlan.payments.length > 0 &&
+        paymentPlan.payments[paymentPlan.payments.length - 1]!.date <=
+          request.desired_completion_date;
+      if (spendingPlan.isSafe && spendingPlan.changes.length > 0 &&
+          (!paymentPlan.isSafe || !completesByDeadline)) {
+        paymentPlan = {
+          paymentMethod: "full_payment",
+          payments: [{ date: request.request_date, amount: request.requested_amount }],
+          totalAmount: request.requested_amount,
+          earliestFullPaymentDate: request.request_date,
+          isSafe: true,
+          requiresSpendingChanges: true,
+        };
+      }
 
       // // 6. Combine everything into the final answer.
       // const decision = makeDecision(

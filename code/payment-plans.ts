@@ -238,13 +238,14 @@ export function createPaymentPlan(
       }
 
       // Verify the ENTIRE installment plan against the 90-day forecast
+      const lastPaymentDate = payments[payments.length - 1]!.date;
+      if (lastPaymentDate > forecast.endDate) {
+        continue;
+      }
       const planResult = simulatePayments(state, payments);
 
       if (planResult.safe) {
         // Check if last payment is within forecast period
-        const lastPaymentDate =
-          payments[payments.length - 1]!.date;
-
         candidates.push({
           paymentMethod: "installments",
           payments,

@@ -52,6 +52,7 @@ export function validateDecision(
   }
 
   if (
+    !Number.isFinite(result.amount_safe_to_pay) ||
     result.amount_safe_to_pay < 0 ||
     result.amount_safe_to_pay >
       request.requested_amount
@@ -88,6 +89,10 @@ export function validateDecision(
     result.payment_plan,
   );
 
+  if (result.payment_plan !== "none" && payments.length === 0) {
+    errors.push({ requestId: request.request_id, field: "payment_plan", message: "A recommended plan needs at least one payment" });
+  }
+
   for (const payment of payments) {
     if (
       !payment.date ||
@@ -100,6 +105,23 @@ export function validateDecision(
         message: "Invalid payment entry",
       });
     }
+  }
+
+  for (let index = 1; index < payments.length; index++) {
+    if (payments[index - 1]!.date > payments[index]!.date) {
+      errors.push({ requestId: request.request_id, field: "payment_plan", message: "Payments must be chronological" });
+      break;
+    }
+  }
+
+  if (result.recommended_payment_method === "full_payment" && payments.length !== 1) {
+    errors.push({ requestId: request.request_id, field: "payment_plan", message: "full_payment must contain one payment" });
+  }
+  if (result.recommended_payment_method === "wait" && payments.length !== 1) {
+    errors.push({ requestId: request.request_id, field: "payment_plan", message: "wait must contain one deferred payment" });
+  }
+  if (result.recommended_payment_method === "installments" && payments.length < 2) {
+    errors.push({ requestId: request.request_id, field: "payment_plan", message: "installments must contain at least two payments" });
   }
 
   if (
@@ -129,6 +151,30 @@ export function validateDecision(
           "affordable_now must have request date as earliest full payment date",
       });
     }
+  }
+
+  if (result.recommended_payment_method === "partial_payment") {
+    if (payments[0]?.date !== request.request_date || payments[1]?.date !== result.earliest_date_for_full_payment) {
+      errors.push({ requestId: request.request_id, field: "payment_plan", message: "Partial payments must start on request date and finish on earliest full-payment date" });
+    }
+    if (!(result.amount_safe_to_pay > 0 && result.amount_safe_to_pay < request.requested_amount)) {
+      errors.push({ requestId: request.request_id, field: "amount_safe_to_pay", message: "Partial payment requires a positive, non-full safe amount" });
+    }
+  }
+
+  const expectedMethods: Record<string, string[]> = {
+    affordable_now: ["full_payment"],
+    affordable_with_plan: ["partial_payment", "installments", "full_payment"],
+    affordable_later: ["wait"],
+    not_affordable: ["not_recommended"],
+  };
+  if (!expectedMethods[result.affordability_status]?.includes(result.recommended_payment_method)) {
+    errors.push({ requestId: request.request_id, field: "recommended_payment_method", message: "Payment method does not match affordability status" });
+  }
+
+  const changes = result.spending_changes_needed === "none" ? [] : result.spending_changes_needed.split("|");
+  if (changes.length > 3 || changes.some((change) => !/^(stop:[^:]+|reduce_to:[^:]+:\d+(?:\.\d+)?)$/.test(change))) {
+    errors.push({ requestId: request.request_id, field: "spending_changes_needed", message: "Spending changes must contain at most three valid actions" });
   }
 
   if (

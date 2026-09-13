@@ -4,9 +4,10 @@ import { validateDecision } from "./validator";
 import type { DecisionResult } from "./decision-engine";
 
 async function verifyOutput() {
-  console.log("Loading dataset and output.csv...");
+  const outputPath = process.env.OUTPUT_PATH ?? "./output.csv";
+  console.log(`Loading dataset and ${outputPath}...`);
   const dataset = await loadDataset("./dataset");
-  const outputContent = await readFile("./output.csv", "utf-8");
+  const outputContent = await readFile(outputPath, "utf-8");
   const rows = parseCSV(outputContent);
 
   console.log(`Total rows in output.csv: ${rows.length}`);
@@ -99,4 +100,3 @@ verifyOutput().catch((err) => {
   console.error("Verification failed:", err);
   process.exit(1);
 });
-

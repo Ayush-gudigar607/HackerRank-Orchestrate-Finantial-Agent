@@ -218,8 +218,10 @@ function isDuplicateEvent(
     return true;
   }
 
-  // Newer event_id takes precedence (larger event_id = newer)
-  return event.event_id > linked.event_id;
+  // For two linked records with neither settled, retain the newer record.
+  // Event ids are generated in chronological order in the supplied dataset,
+  // so the older record is the duplicate.
+  return event.event_id < linked.event_id;
 }
 
 /**
@@ -356,8 +358,12 @@ function buildDailyChanges(
       const dates = incomeSeries.map(
         (e) => e.settlement_date || e.event_date,
       );
-      const interval = detectIntervalFromDates(dates) ?? 30; // default monthly for confirmed salary
+    // Do not invent a monthly income stream from one observed payment.  A
+    // future income forecast needs a demonstrated cadence (or an explicit
+    // scheduled event, which was handled above).
+    const interval = detectIntervalFromDates(dates);
 
+    if (interval !== null) {
       const resolved = resolveEventAmount(state, latestIncome);
       if (resolved.amount !== null && resolved.amount > 0) {
         const amountHome = convertToHomeCurrency(
@@ -386,6 +392,7 @@ function buildDailyChanges(
           }
         }
       }
+    }
     }
   }
 

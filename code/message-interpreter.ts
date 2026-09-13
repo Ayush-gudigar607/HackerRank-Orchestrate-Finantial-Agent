@@ -25,6 +25,7 @@ export interface MessageEffect {
     | "no_effect";
   eventId?: string;
   newAmount?: number;
+  percentageChange?: number;
   newDate?: string;
   description: string;
 }
@@ -39,6 +40,18 @@ export function interpretMessage(
   userEvents: FinancialEvent[],
 ): MessageEffect {
   const text = message.message_text.toLowerCase();
+
+  // Payroll notices commonly include descriptive words between "salary" and
+  // the revised amount (including the Indonesian templates in this dataset).
+  const broadSalaryMatch = text.match(
+    /(?:salary|gaji)(?:[^\d]{0,80}?)(?:increased|naik\s+menjadi|reduced\s+to|adalah|is\s+now|to)\s*(?:idr|eur|zar|inr|usd)?\s*([\d,]+(?:\.\d+)?)/i,
+  );
+  if (broadSalaryMatch) {
+    const newAmount = Number(broadSalaryMatch[1]!.replace(/,/g, ""));
+    if (Number.isFinite(newAmount) && newAmount > 0) {
+      return { type: "salary_change", newAmount, eventId: message.related_event_id || undefined, description: `Salary changed to ${newAmount}` };
+    }
+  }
 
   // Payment cancelled / refund not yet received
   if (
@@ -162,6 +175,7 @@ export function interpretMessage(
     return {
       type: "amount_amended",
       eventId: message.related_event_id || undefined,
+      percentageChange: Number(rentIncreaseMatch[1]),
       description: `Rent increases by ${rentIncreaseMatch[1]}%`,
     };
   }
@@ -260,6 +274,14 @@ export function applyMessageEffects(
 
   const modifiedEvents = events.map((e) => ({ ...e }));
 
+  const latestMatchingEvent = (credit: boolean, category?: string) =>
+    modifiedEvents
+      .filter((event) => {
+        const isCredit = event.direction.trim().toLowerCase() === "credit";
+        return isCredit === credit && (!category || event.category.toLowerCase().includes(category));
+      })
+      .sort((a, b) => (b.settlement_date || b.event_date).localeCompare(a.settlement_date || a.event_date))[0];
+
   for (const message of sortedMessages) {
     const effect = interpretMessage(message, modifiedEvents);
 
@@ -289,6 +311,42 @@ export function applyMessageEffects(
       );
       if (event && event.status !== "settled") {
         event.status = "pending";
+      }
+    }
+
+    if ((effect.type === "salary_change" || effect.type === "amount_amended") && effect.newAmount !== undefined) {
+      const event = effect.eventId
+        ? modifiedEvents.find((e) => e.event_id === effect.eventId)
+        : effect.type === "salary_change"
+          ? latestMatchingEvent(true, "salary")
+          : undefined;
+      if (event) event.amount = effect.newAmount;
+    }
+
+    if (effect.type === "amount_amended" && effect.percentageChange !== undefined) {
+      const event = effect.eventId
+        ? modifiedEvents.find((e) => e.event_id === effect.eventId)
+        : latestMatchingEvent(false, "rent");
+      if (event && event.amount !== null) {
+        event.amount = event.amount * (1 + effect.percentageChange / 100);
+      }
+    }
+
+    if (effect.type === "payment_delayed" && effect.newDate) {
+      const event = effect.eventId
+        ? modifiedEvents.find((e) => e.event_id === effect.eventId)
+        : latestMatchingEvent(true, "salary");
+      if (event) {
+        event.event_date = effect.newDate;
+        event.settlement_date = effect.newDate;
+      }
+    }
+
+    if (effect.type === "payment_confirmed" && effect.eventId) {
+      const event = modifiedEvents.find((e) => e.event_id === effect.eventId);
+      if (event) {
+        event.status = "settled";
+        if (effect.newAmount !== undefined) event.amount = effect.newAmount;
       }
     }
   }

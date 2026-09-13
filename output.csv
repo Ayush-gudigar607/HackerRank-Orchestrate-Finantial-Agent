@@ -1,251 +1,243 @@
-request_id,amount_safe_to_pay,affordability_status,recommended_payment_method,payment_plan,earliest_date_for_full_payment,spending_changes_needed,decision_explanation
-request_26,0,not_affordable,not_recommended,none,,none,Do not make this payment. None of the available options keeps the IDR 24768300 minimum protected.
-request_27,0,not_affordable,not_recommended,none,,none,"The requested amount of ZAR 6670 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_28,0,not_affordable,not_recommended,none,,none,"The requested amount of EUR 1302.4 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_29,0,not_affordable,not_recommended,none,,none,"The requested amount of ZAR 51524 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_30,0,not_affordable,not_recommended,none,,none,"The requested amount of USD 775.2 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_31,0,not_affordable,not_recommended,none,,none,"The requested amount of IDR 18164000 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_32,0,not_affordable,not_recommended,none,,none,"The requested amount of ZAR 40018 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_33,10509.61,affordable_later,wait,2026-01-12:118000,2026-01-12,none,Pay INR 118000 in full on 2026-01-12. Paying earlier would take the balance below the INR 102100 minimum.
-request_34,0,not_affordable,not_recommended,none,,none,"The requested amount of INR 129400 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_35,0,not_affordable,not_recommended,none,,none,"The requested amount of INR 212000 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_36,0,not_affordable,not_recommended,none,,none,"The requested amount of USD 3954 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_37,0,not_affordable,not_recommended,none,,none,"The requested amount of IDR 14649000 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_38,0,not_affordable,not_recommended,none,,none,"The requested amount of EUR 971.3 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_39,0,not_affordable,not_recommended,none,,none,"The requested amount of INR 208600 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_40,0,not_affordable,not_recommended,none,,none,"The requested amount of EUR 1290.3 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_41,0,not_affordable,not_recommended,none,,none,"The requested amount of IDR 38760000 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_42,52100,affordable_now,full_payment,2026-01-05:52100,2026-01-05,none,Pay INR 52100 today. This keeps the INR 113100 minimum available over the next 90 days.
-request_43,3612516.97,affordable_later,wait,2024-09-12:43339000,2024-09-12,none,Pay IDR 43339000 in full on 2024-09-12. Paying earlier would take the balance below the IDR 21398000 minimum.
-request_44,0,not_affordable,not_recommended,none,,none,"The requested amount of INR 95800 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_45,0,not_affordable,not_recommended,none,,none,"The requested amount of IDR 21983000 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_46,0,not_affordable,not_recommended,none,,none,"The requested amount of INR 49450 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_47,0,not_affordable,not_recommended,none,,none,"The requested amount of IDR 38114000 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_48,0,not_affordable,not_recommended,none,,none,"The requested amount of INR 45700 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_49,0,not_affordable,not_recommended,none,,none,"The requested amount of IDR 34333000 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_50,9401.49,affordable_later,wait,2025-08-12:43900,2025-08-12,none,Pay INR 43900 in full on 2025-08-12. Paying earlier would take the balance below the INR 99700 minimum.
-request_51,0,not_affordable,not_recommended,none,,none,Do not make this payment. None of the available options keeps the IDR 7811000 minimum protected.
-request_52,0,not_affordable,not_recommended,none,,none,"The requested amount of INR 28870 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_53,0,not_affordable,not_recommended,none,,none,"The requested amount of USD 1699.2 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_54,0,not_affordable,not_recommended,none,,none,"The requested amount of ZAR 121528 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_55,79871.97,affordable_with_plan,installments,2026-06-11:75781.33|2026-07-12:75781.33|2026-08-12:75781.33,2026-06-13,none,"Use 3 installments of INR 75781.33, starting 2026-06-11. This leaves at least INR 124300 available."
-request_56,0,not_affordable,not_recommended,none,,none,"The requested amount of USD 881.56 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_57,0,not_affordable,not_recommended,none,,none,"The requested amount of ZAR 61446 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_58,16226000,affordable_now,full_payment,2024-12-07:16226000,2024-12-07,none,Pay IDR 16226000 today. This keeps the IDR 14433900 minimum available over the next 90 days.
-request_59,0,not_affordable,not_recommended,none,,none,"The requested amount of INR 140600 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_60,91.11,affordable_later,wait,2026-01-12:199.89,2026-01-12,none,Pay USD 199.89 in full on 2026-01-12. Paying earlier would take the balance below the USD 400 minimum.
-request_61,0,not_affordable,not_recommended,none,,none,"The requested amount of ZAR 29062 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_62,0,not_affordable,not_recommended,none,,none,"The requested amount of USD 404.23 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_63,0,not_affordable,not_recommended,none,,none,"The requested amount of INR 343900 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_64,9394.57,not_affordable,not_recommended,none,2024-06-13,none,"The requested amount of INR 63700 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_65,0,not_affordable,not_recommended,none,,none,"The requested amount of ZAR 54340 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_66,22200,affordable_now,full_payment,2026-04-03:22200,2026-04-03,none,Pay INR 22200 today. This keeps the INR 80700 minimum available over the next 90 days.
-request_67,0,not_affordable,not_recommended,none,,none,"The requested amount of USD 2094 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_68,0,not_affordable,not_recommended,none,,none,"The requested amount of USD 2091.6 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_69,0,not_affordable,not_recommended,none,,none,"The requested amount of EUR 529.1 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_70,0,not_affordable,not_recommended,none,,none,"The requested amount of INR 243900 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_71,0,not_affordable,not_recommended,none,,none,"The requested amount of IDR 21451000 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_72,0,not_affordable,not_recommended,none,,none,"The requested amount of ZAR 11330 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_73,0,not_affordable,not_recommended,none,,none,"The requested amount of INR 71400 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_74,0,not_affordable,not_recommended,none,,none,"The requested amount of ZAR 5010 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_75,28270,affordable_with_plan,installments,2026-04-09:9800.27|2026-05-09:9800.27|2026-06-08:9800.27,2026-04-06,none,"Use 3 installments of ZAR 9800.27, starting 2026-04-09. This leaves at least ZAR 39000 available."
-request_76,0,not_affordable,not_recommended,none,,none,"The requested amount of USD 4455.6 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_77,0,not_affordable,not_recommended,none,,none,"The requested amount of INR 60700 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_78,0,not_affordable,not_recommended,none,,none,"The requested amount of INR 50200 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_79,120.69,affordable_with_plan,partial_payment,2024-09-04:120.69|2024-09-12:2030.91,2024-09-12,none,"The full amount of EUR 2151.6 is not safely payable today. However, EUR 120.69 can be paid today and the remaining amount can be paid on 2024-09-12 within the requested completion date."
-request_80,59487.83,not_affordable,not_recommended,none,,none,"The requested amount of INR 217500 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_81,0,not_affordable,not_recommended,none,,none,"The requested amount of USD 2076 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_82,0,not_affordable,not_recommended,none,,none,Do not make this payment. None of the available options keeps the USD 1100 minimum protected.
-request_83,0,not_affordable,not_recommended,none,,none,"The requested amount of INR 156200 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_84,0,not_affordable,not_recommended,none,,none,"The requested amount of INR 95400 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_85,0,not_affordable,not_recommended,none,,none,"The requested amount of IDR 19304000 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_86,0,not_affordable,not_recommended,none,,none,"The requested amount of INR 46300 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_87,0,not_affordable,not_recommended,none,,none,"The requested amount of INR 487900 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_88,0,not_affordable,not_recommended,none,,none,"The requested amount of ZAR 26092 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_89,0,not_affordable,not_recommended,none,,none,"The requested amount of IDR 13756000 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_90,0,not_affordable,not_recommended,none,,none,"The requested amount of ZAR 2560 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_91,0,not_affordable,not_recommended,none,,none,"The requested amount of EUR 1927.2 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_92,18967.11,affordable_later,wait,2025-02-12:34034,2025-02-12,none,Pay ZAR 34034 in full on 2025-02-12. Paying earlier would take the balance below the ZAR 28100 minimum.
-request_93,1263.27,affordable_later,wait,2026-04-14:1729.2,2026-04-14,none,Pay USD 1729.2 in full on 2026-04-14. Paying earlier would take the balance below the USD 1900 minimum.
-request_94,0,not_affordable,not_recommended,none,,none,"The requested amount of EUR 572 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_95,0,not_affordable,not_recommended,none,,none,"The requested amount of INR 553000 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_96,0,not_affordable,not_recommended,none,,none,"The requested amount of INR 90200 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_97,0,not_affordable,not_recommended,none,,none,"The requested amount of ZAR 23496 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_98,5648.87,affordable_later,wait,2025-08-12:27148,2025-08-12,none,Pay ZAR 27148 in full on 2025-08-12. Paying earlier would take the balance below the ZAR 30000 minimum.
-request_99,0,not_affordable,not_recommended,none,,none,"The requested amount of ZAR 18062 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_100,9562.03,affordable_with_plan,installments,2024-06-13:12866.19|2024-07-14:12866.19|2024-08-14:12866.19,2024-06-13,none,"Use 3 installments of ZAR 12866.19, starting 2024-06-13. This leaves at least ZAR 32500 available."
-request_101,0,not_affordable,not_recommended,none,,none,"The requested amount of INR 143500 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_102,0,not_affordable,not_recommended,none,,none,"The requested amount of EUR 1716 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_103,9656.65,affordable_later,wait,2024-09-12:368300,2024-09-12,none,Pay INR 368300 in full on 2024-09-12. Paying earlier would take the balance below the INR 125500 minimum.
-request_104,0,not_affordable,not_recommended,none,,none,"The requested amount of ZAR 17204 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_105,34599.56,affordable_later,wait,2026-06-13:53500,2026-06-13,none,Pay INR 53500 in full on 2026-06-13. Paying earlier would take the balance below the INR 73900 minimum.
-request_106,0,not_affordable,not_recommended,none,,none,"The requested amount of EUR 2207.7 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_107,0,not_affordable,not_recommended,none,,none,"The requested amount of EUR 2534.4 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_108,0,not_affordable,not_recommended,none,,none,"The requested amount of ZAR 55308 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_109,0,not_affordable,not_recommended,none,,none,"The requested amount of EUR 1863.4 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_110,0,not_affordable,not_recommended,none,,none,"The requested amount of ZAR 22352 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_111,16216261.11,affordable_later,wait,2026-04-14:16625000,2026-04-14,none,Pay IDR 16625000 in full on 2026-04-14. Paying earlier would take the balance below the IDR 23022800 minimum.
-request_112,0,not_affordable,not_recommended,none,,none,"The requested amount of EUR 271.7 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_113,0,not_affordable,not_recommended,none,,none,"The requested amount of INR 36500 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_114,1502.49,affordable_later,wait,2026-01-12:65300,2026-01-12,none,Pay INR 65300 in full on 2026-01-12. Paying earlier would take the balance below the INR 113400 minimum.
-request_115,0,not_affordable,not_recommended,none,,none,"The requested amount of INR 80500 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_116,0,not_affordable,not_recommended,none,,none,"The requested amount of INR 241200 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_117,151.75,affordable_later,wait,2026-07-13:880,2026-07-13,none,Pay EUR 880 in full on 2026-07-13. Paying earlier would take the balance below the EUR 1000 minimum.
-request_118,259.71,affordable_with_plan,installments,2024-12-07:255.87|2025-01-07:255.87|2025-02-07:255.87,2024-12-12,none,"Use 3 installments of EUR 255.87, starting 2024-12-07. This leaves at least EUR 600 available."
-request_119,0,not_affordable,not_recommended,none,,none,"The requested amount of INR 203500 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_120,2871837.53,affordable_later,wait,2026-04-14:7714000,2026-04-14,none,Pay IDR 7714000 in full on 2026-04-14. Paying earlier would take the balance below the IDR 20050300 minimum.
-request_121,75.52,affordable_later,wait,2024-03-13:633.6,2024-03-13,none,Pay USD 633.6 in full on 2024-03-13. Paying earlier would take the balance below the USD 800 minimum.
-request_122,11705181.77,not_affordable,not_recommended,none,,none,"The requested amount of IDR 20558000 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_123,0,not_affordable,not_recommended,none,,none,Do not make this payment. None of the available options keeps the IDR 18091200 minimum protected.
-request_124,0,not_affordable,not_recommended,none,,none,"The requested amount of EUR 3104.2 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_125,4017.63,affordable_later,wait,2025-11-12:6468,2025-11-12,none,Pay ZAR 6468 in full on 2025-11-12. Paying earlier would take the balance below the ZAR 11300 minimum.
-request_126,0,not_affordable,not_recommended,none,,none,"The requested amount of INR 159600 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_127,0,not_affordable,not_recommended,none,,none,"The requested amount of ZAR 23980 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_128,17659.97,affordable_later,wait,2025-02-12:25168,2025-02-12,none,Pay ZAR 25168 in full on 2025-02-12. Paying earlier would take the balance below the ZAR 42600 minimum.
-request_129,0,not_affordable,not_recommended,none,,none,"The requested amount of USD 2668.8 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_130,58.56,affordable_later,wait,2024-12-12:1978.8,2024-12-12,none,Pay USD 1978.8 in full on 2024-12-12. Paying earlier would take the balance below the USD 1400 minimum.
-request_131,0,not_affordable,not_recommended,none,,none,"The requested amount of USD 1855.2 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_132,0,not_affordable,not_recommended,none,,none,"The requested amount of USD 379.86 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_133,0,not_affordable,not_recommended,none,,none,"The requested amount of IDR 15770000 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_134,0,not_affordable,not_recommended,none,,none,"The requested amount of IDR 21831000 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_135,0,not_affordable,not_recommended,none,,none,"The requested amount of USD 304.8 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_136,0,not_affordable,not_recommended,none,,none,"The requested amount of USD 560.4 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_137,0,not_affordable,not_recommended,none,,none,"The requested amount of INR 80100 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_138,196.74,affordable_with_plan,partial_payment,2026-04-07:196.74|2026-04-14:1060.2,2026-04-14,none,"The full amount of EUR 1256.94 is not safely payable today. However, EUR 196.74 can be paid today and the remaining amount can be paid on 2026-04-14 within the requested completion date."
-request_139,1571.39,affordable_with_plan,installments,2024-09-07:802.88|2024-10-08:802.88|2024-11-08:802.88,2024-09-12,none,"Use 3 installments of USD 802.88, starting 2024-09-07. This leaves at least USD 1500 available."
-request_140,0,not_affordable,not_recommended,none,,none,"The requested amount of ZAR 62832 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_141,0,not_affordable,not_recommended,none,,none,"The requested amount of INR 171600 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_142,0,not_affordable,not_recommended,none,,none,"The requested amount of USD 1263.6 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_143,0,not_affordable,not_recommended,none,,none,"The requested amount of ZAR 12584 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_144,0,not_affordable,not_recommended,none,,none,"The requested amount of USD 233.34 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_145,0,not_affordable,not_recommended,none,,none,"The requested amount of INR 217400 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_146,0,not_affordable,not_recommended,none,,none,"The requested amount of INR 449400 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_147,0,not_affordable,not_recommended,none,,none,"The requested amount of EUR 1129.7 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_148,0,not_affordable,not_recommended,none,,none,"The requested amount of ZAR 22242 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_149,0,not_affordable,not_recommended,none,,none,"The requested amount of ZAR 36652 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_150,87.82,not_affordable,not_recommended,none,2026-01-12,none,"The requested amount of EUR 496.1 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_151,0,not_affordable,not_recommended,none,,none,"The requested amount of IDR 26999000 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_152,2299.66,affordable_with_plan,installments,2025-02-12:4812.43|2025-03-12:4812.43|2025-04-09:4812.43,2025-02-12,none,"Use 3 installments of ZAR 4812.43, starting 2025-02-12. This leaves at least ZAR 11900 available."
-request_153,0,not_affordable,not_recommended,none,,none,"The requested amount of USD 2830.8 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_154,1462.39,affordable_with_plan,installments,2024-12-04:563.61|2025-01-04:563.61|2025-02-04:563.61,2024-12-12,none,"Use 3 installments of EUR 563.61, starting 2024-12-04. This leaves at least EUR 1300 available."
-request_155,0,not_affordable,not_recommended,none,,none,"The requested amount of INR 112500 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_156,0,not_affordable,not_recommended,none,,none,"The requested amount of ZAR 43076 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_157,0,not_affordable,not_recommended,none,,none,"The requested amount of IDR 23503000 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_158,0,not_affordable,not_recommended,none,,none,"The requested amount of INR 242600 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_159,0,not_affordable,not_recommended,none,,none,"The requested amount of ZAR 13398 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_160,0,not_affordable,not_recommended,none,,none,"The requested amount of EUR 1246.3 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_161,0,not_affordable,not_recommended,none,,none,"The requested amount of IDR 21204000 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_162,0,not_affordable,not_recommended,none,,none,"The requested amount of IDR 83923000 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_163,0,not_affordable,not_recommended,none,,none,"The requested amount of IDR 19304000 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_164,767547.23,not_affordable,not_recommended,none,2025-02-12,none,"The requested amount of IDR 27018000 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_165,80600,affordable_now,full_payment,2026-04-06:80600,2026-04-06,none,Pay INR 80600 today. This keeps the INR 95000 minimum available over the next 90 days.
-request_166,0,not_affordable,not_recommended,none,,none,"The requested amount of USD 2907.6 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_167,3480.58,affordable_later,wait,2025-05-14:43802,2025-05-14,none,Pay ZAR 43802 in full on 2025-05-14. Paying earlier would take the balance below the ZAR 31200 minimum.
-request_168,188.27,affordable_with_plan,partial_payment,2026-01-07:188.27|2026-01-12:49191.73,2026-01-12,none,"The full amount of INR 49380 is not safely payable today. However, INR 188.27 can be paid today and the remaining amount can be paid on 2026-01-12 within the requested completion date."
-request_169,30943.23,affordable_later,wait,2024-03-13:41976,2024-03-13,none,Pay ZAR 41976 in full on 2024-03-13. Paying earlier would take the balance below the ZAR 18700 minimum.
-request_170,1197571.32,not_affordable,not_recommended,none,2025-08-12,none,"The requested amount of IDR 36936000 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_171,0,not_affordable,not_recommended,none,,none,"The requested amount of EUR 1878.8 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_172,0,not_affordable,not_recommended,none,,none,"The requested amount of ZAR 10200 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_173,51076.01,affordable_with_plan,installments,2025-11-21:39173.33|2025-12-19:39173.33|2026-01-16:39173.33,2025-11-12,none,"Use 3 installments of INR 39173.33, starting 2025-11-21. This leaves at least INR 79100 available."
-request_174,1146.2,affordable_with_plan,installments,2026-04-04:397.35|2026-05-04:397.35|2026-06-03:397.35,2026-04-04,none,"Use 3 installments of EUR 397.35, starting 2026-04-04. This leaves at least EUR 700 available."
-request_175,2346.3,affordable_now,full_payment,2024-09-06:2346.3,2024-09-06,none,Pay EUR 2346.3 today. This keeps the EUR 1700 minimum available over the next 90 days.
-request_176,0,not_affordable,not_recommended,none,,none,"The requested amount of EUR 1239.7 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_177,522.01,affordable_later,wait,2026-01-12:1017.6,2026-01-12,none,Pay USD 1017.6 in full on 2026-01-12. Paying earlier would take the balance below the USD 1300 minimum.
-request_178,0,not_affordable,not_recommended,none,,none,"The requested amount of EUR 2938.1 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_179,0,not_affordable,not_recommended,none,,none,"The requested amount of IDR 41648000 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_180,0,not_affordable,not_recommended,none,,none,"The requested amount of INR 66500 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_181,0,not_affordable,not_recommended,none,,none,"The requested amount of USD 5059.2 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_182,37916.46,affordable_later,wait,2025-08-12:65714,2025-08-12,none,Pay ZAR 65714 in full on 2025-08-12. Paying earlier would take the balance below the ZAR 31100 minimum.
-request_183,15837033.82,affordable_with_plan,installments,2026-04-10:9313546.67|2026-05-10:9313546.67|2026-06-09:9313546.67,2026-04-14,none,"Use 3 installments of IDR 9313546.67, starting 2026-04-10. This leaves at least IDR 11878300 available."
-request_184,0,not_affordable,not_recommended,none,,none,"The requested amount of INR 251900 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_185,0,not_affordable,not_recommended,none,,none,"The requested amount of EUR 1257.3 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_186,0,not_affordable,not_recommended,none,,none,"The requested amount of ZAR 26554 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_187,0,not_affordable,not_recommended,none,,none,"The requested amount of INR 187500 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_188,0,not_affordable,not_recommended,none,,none,"The requested amount of EUR 2464 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_189,134.09,affordable_with_plan,partial_payment,2026-07-04:134.09|2026-07-13:354.31,2026-07-13,none,"The full amount of EUR 488.4 is not safely payable today. However, EUR 134.09 can be paid today and the remaining amount can be paid on 2026-07-13 within the requested completion date."
-request_190,0,not_affordable,not_recommended,none,,none,"The requested amount of EUR 2557.5 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_191,0,not_affordable,not_recommended,none,,none,"The requested amount of EUR 664.4 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_192,0,not_affordable,not_recommended,none,,none,"The requested amount of USD 2046 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_193,0,not_affordable,not_recommended,none,,none,"The requested amount of EUR 1212.2 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_194,0,not_affordable,not_recommended,none,,none,"The requested amount of INR 132800 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_195,618.34,affordable_with_plan,installments,2026-01-09:405.74|2026-02-08:405.74|2026-03-10:405.74,2026-01-12,none,"Use 3 installments of EUR 405.74, starting 2026-01-09. This leaves at least EUR 700 available."
-request_196,491.35,affordable_later,wait,2024-06-13:762.3,2024-06-13,none,Pay EUR 762.3 in full on 2024-06-13. Paying earlier would take the balance below the EUR 500 minimum.
-request_197,0,not_affordable,not_recommended,none,,none,"The requested amount of IDR 50939000 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_198,152092.65,affordable_later,wait,2026-07-13:185800,2026-07-13,none,Pay INR 185800 in full on 2026-07-13. Paying earlier would take the balance below the INR 124300 minimum.
-request_199,23674000,affordable_with_plan,installments,2024-09-07:8206986.67|2024-10-08:8206986.67|2024-11-08:8206986.67,2024-09-04,none,"Use 3 installments of IDR 8206986.67, starting 2024-09-07. This leaves at least IDR 25359500 available."
-request_200,19377810.78,affordable_later,wait,2025-02-12:21717000,2025-02-12,none,Pay IDR 21717000 in full on 2025-02-12. Paying earlier would take the balance below the IDR 20114600 minimum.
-request_201,23997000,affordable_now,full_payment,2026-04-03:23997000,2026-04-03,none,Pay IDR 23997000 today. This keeps the IDR 17304500 minimum available over the next 90 days.
-request_202,55789.09,affordable_later,wait,2024-12-12:123900,2024-12-12,none,Pay INR 123900 in full on 2024-12-12. Paying earlier would take the balance below the INR 147800 minimum.
-request_203,0,not_affordable,not_recommended,none,,none,"The requested amount of EUR 1442.1 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_204,0,not_affordable,not_recommended,none,,none,"The requested amount of EUR 588.74 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_205,3990716.58,affordable_later,wait,2024-03-13:10621000,2024-03-13,none,Pay IDR 10621000 in full on 2024-03-13. Paying earlier would take the balance below the IDR 13994300 minimum.
-request_206,0,not_affordable,not_recommended,none,,none,"The requested amount of EUR 1404.7 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_207,0,not_affordable,not_recommended,none,,none,"The requested amount of ZAR 11830 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_208,0,not_affordable,not_recommended,none,,none,"The requested amount of IDR 4413000 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_209,0,not_affordable,not_recommended,none,,none,"The requested amount of ZAR 56914 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_210,0,not_affordable,not_recommended,none,,none,"The requested amount of USD 1360.02 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_211,0,not_affordable,not_recommended,none,,none,"The requested amount of EUR 1788.6 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_212,0,not_affordable,not_recommended,none,,none,"The requested amount of IDR 71934000 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_213,0,not_affordable,not_recommended,none,,none,"The requested amount of USD 3362.4 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_214,0,not_affordable,not_recommended,none,,none,"The requested amount of INR 69750 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_215,0,not_affordable,not_recommended,none,,none,"The requested amount of ZAR 29986 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_216,0,not_affordable,not_recommended,none,,none,"The requested amount of USD 3332.4 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_217,0,not_affordable,not_recommended,none,,none,"The requested amount of ZAR 37180 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_218,9462441.42,not_affordable,not_recommended,none,2025-08-13,none,Do not make this payment. None of the available options keeps the IDR 34477200 minimum protected.
-request_219,0,not_affordable,not_recommended,none,,none,"The requested amount of EUR 1673.1 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_220,0,not_affordable,not_recommended,none,,none,"The requested amount of EUR 3118.5 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_221,0,not_affordable,not_recommended,none,,none,"The requested amount of INR 109800 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_222,0,not_affordable,not_recommended,none,,none,"The requested amount of ZAR 34078 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_223,681.64,affordable_later,wait,2024-09-12:898.7,2024-09-12,none,Pay EUR 898.7 in full on 2024-09-12. Paying earlier would take the balance below the EUR 800 minimum.
-request_224,0,not_affordable,not_recommended,none,,none,"The requested amount of IDR 10327000 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_225,0,not_affordable,not_recommended,none,,none,"The requested amount of IDR 22059000 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_226,12565.84,affordable_later,wait,2024-12-12:157000,2024-12-12,none,Pay INR 157000 in full on 2024-12-12. Paying earlier would take the balance below the INR 209400 minimum.
-request_227,0,not_affordable,not_recommended,none,,none,"The requested amount of INR 259700 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_228,0,not_affordable,not_recommended,none,,none,"The requested amount of IDR 63327000 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_229,150.14,affordable_with_plan,installments,2024-03-18:529.29|2024-04-18:529.29|2024-05-19:529.29,2024-03-14,none,"Use 3 installments of EUR 529.29, starting 2024-03-18. This leaves at least EUR 1000 available."
-request_230,3295.9,affordable_later,wait,2025-08-12:3537.6,2025-08-12,none,Pay EUR 3537.6 in full on 2025-08-12. Paying earlier would take the balance below the EUR 2000 minimum.
-request_231,0,not_affordable,not_recommended,none,,none,"The requested amount of ZAR 35706 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_232,0,not_affordable,not_recommended,none,,none,"The requested amount of EUR 1970.1 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_233,0,not_affordable,not_recommended,none,,none,"The requested amount of IDR 6241000 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_234,0,not_affordable,not_recommended,none,,none,"The requested amount of EUR 1213.3 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_235,801.44,affordable_later,wait,2024-09-12:967.2,2024-09-12,none,Pay USD 967.2 in full on 2024-09-12. Paying earlier would take the balance below the USD 700 minimum.
-request_236,0,not_affordable,not_recommended,none,,none,"The requested amount of IDR 52383000 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_237,0,not_affordable,not_recommended,none,,none,"The requested amount of IDR 23826000 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_238,663.6,affordable_with_plan,installments,2024-12-07:230.05|2025-01-07:230.05|2025-02-07:230.05,2024-12-07,none,"Use 3 installments of USD 230.05, starting 2024-12-07. This leaves at least USD 700 available."
-request_239,0,not_affordable,not_recommended,none,,none,"The requested amount of USD 642 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_240,0,not_affordable,not_recommended,none,,none,"The requested amount of INR 101200 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_241,0,not_affordable,not_recommended,none,,none,"The requested amount of IDR 21052000 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_242,0,not_affordable,not_recommended,none,,none,"The requested amount of EUR 1966.8 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_243,8281.32,affordable_later,wait,2026-07-13:17468,2026-07-13,none,Pay ZAR 17468 in full on 2026-07-13. Paying earlier would take the balance below the ZAR 19900 minimum.
-request_244,0,not_affordable,not_recommended,none,,none,"The requested amount of ZAR 49918 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_245,0,not_affordable,not_recommended,none,,none,"The requested amount of INR 128500 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_246,64086,affordable_with_plan,installments,2026-04-03:22216.48|2026-05-03:22216.48|2026-06-02:22216.48,2026-04-03,none,"Use 3 installments of ZAR 22216.48, starting 2026-04-03. This leaves at least ZAR 39300 available."
-request_247,737.36,affordable_later,wait,2024-09-12:1059.3,2024-09-12,none,Pay EUR 1059.3 in full on 2024-09-12. Paying earlier would take the balance below the EUR 1300 minimum.
-request_248,0,not_affordable,not_recommended,none,,none,"The requested amount of USD 1965.6 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_249,0,not_affordable,not_recommended,none,,none,"The requested amount of USD 643.2 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_250,0,not_affordable,not_recommended,none,,none,"The requested amount of ZAR 124278 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_251,0,not_affordable,not_recommended,none,,none,"The requested amount of EUR 1513.6 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_252,0,not_affordable,not_recommended,none,,none,Do not make this payment. None of the available options keeps the IDR 15152200 minimum protected.
-request_253,0,not_affordable,not_recommended,none,,none,"The requested amount of EUR 2840.2 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_254,0,not_affordable,not_recommended,none,,none,"The requested amount of USD 3535.2 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_255,3345000,affordable_now,full_payment,2026-04-06:3345000,2026-04-06,none,Pay IDR 3345000 today. This keeps the IDR 9813900 minimum available over the next 90 days.
-request_256,0,not_affordable,not_recommended,none,,none,"The requested amount of INR 218700 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_257,0,not_affordable,not_recommended,none,,none,"The requested amount of USD 1352.4 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_258,1113.6,affordable_now,full_payment,2026-01-07:1113.6,2026-01-07,none,Pay USD 1113.6 today. This keeps the USD 500 minimum available over the next 90 days.
-request_259,71.63,affordable_later,wait,2024-09-12:935,2024-09-12,none,Pay EUR 935 in full on 2024-09-12. Paying earlier would take the balance below the EUR 600 minimum.
-request_260,3264943.11,affordable_with_plan,partial_payment,2025-02-06:3264943.11|2025-02-12:48814056.89,2025-02-12,none,"The full amount of IDR 52079000 is not safely payable today. However, IDR 3264943.11 can be paid today and the remaining amount can be paid on 2025-02-12 within the requested completion date."
-request_261,324.49,affordable_later,wait,2026-07-13:1830.4,2026-07-13,none,Pay EUR 1830.4 in full on 2026-07-13. Paying earlier would take the balance below the EUR 1500 minimum.
-request_262,6356706.21,affordable_with_plan,partial_payment,2024-12-05:6356706.21|2024-12-12:2879293.79,2024-12-12,none,"The full amount of IDR 9236000 is not safely payable today. However, IDR 6356706.21 can be paid today and the remaining amount can be paid on 2024-12-12 within the requested completion date."
-request_263,0,not_affordable,not_recommended,none,,none,"The requested amount of ZAR 51546 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_264,0,not_affordable,not_recommended,none,,none,"The requested amount of INR 111300 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_265,0,not_affordable,not_recommended,none,,none,"The requested amount of INR 45970 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_266,0,not_affordable,not_recommended,none,,none,Do not make this payment. None of the available options keeps the EUR 900 minimum protected.
-request_267,557.54,not_affordable,not_recommended,none,2026-01-12,none,"The requested amount of EUR 1925 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_268,0,not_affordable,not_recommended,none,,none,"The requested amount of EUR 2426.6 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_269,0,not_affordable,not_recommended,none,,none,"The requested amount of ZAR 15490 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_270,0,not_affordable,not_recommended,none,,none,"The requested amount of USD 3028.8 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_271,0,not_affordable,not_recommended,none,,none,"The requested amount of INR 91300 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_272,1829849.92,affordable_with_plan,installments,2025-02-12:4709466.67|2025-03-12:4709466.67|2025-04-09:4709466.67,2025-02-12,none,"Use 3 installments of IDR 4709466.67, starting 2025-02-12. This leaves at least IDR 7508600 available."
-request_273,0,not_affordable,not_recommended,none,,none,"The requested amount of IDR 15861000 cannot be safely paid under the available payment options. Optional spending changes were considered, but they do not produce a safe eligible plan."
-request_274,1163.83,affordable_with_plan,installments,2024-12-04:940.75|2025-01-04:940.75|2025-02-04:940.75,2024-12-12,none,"Use 3 installments of EUR 940.75, starting 2024-12-04. This leaves at least EUR 1800 available."
-request_275,3732966.4,affordable_later,wait,2025-05-14:15884000,2025-05-14,none,Pay IDR 15884000 in full on 2025-05-14. Paying earlier would take the balance below the IDR 12760100 minimum.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
