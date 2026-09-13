@@ -186,31 +186,28 @@ export function createPaymentPlan(
       );
 
     for (const option of installmentOptions) {
-      const interval =
-        option.recurring_interval.toLowerCase();
+        const paymentsCount = option.number_of_payments;
+        const paymentFrequencyDays = option.payment_frequency_days;
 
-      let months = 1;
-
-      if (interval.includes("3")) {
-        months = 3;
-      } else if (interval.includes("6")) {
-        months = 6;
-      } else if (interval.includes("9")) {
-        months = 9;
-      } else if (interval.includes("12")) {
-        months = 12;
-      }
+        if (
+          !Number.isInteger(paymentsCount) ||
+          paymentsCount < 2 ||
+          paymentFrequencyDays === null ||
+          paymentFrequencyDays <= 0
+        ) {
+          continue;
+        }
 
       if (
         state.profile.max_installment_months !== null &&
-        months >
+          paymentsCount >
           state.profile.max_installment_months
       ) {
         continue;
       }
 
       const installmentAmount =
-        option.total_payable / months;
+          option.total_payable / paymentsCount;
 
       const payments: {
         date: string;
@@ -219,10 +216,14 @@ export function createPaymentPlan(
 
       let safe = true;
 
-      for (let month = 0; month < months; month++) {
+      for (
+        let paymentIndex = 0;
+        paymentIndex < paymentsCount;
+        paymentIndex++
+      ) {
         const date = addDays(
-          option.start_date,
-          month * 30,
+          option.first_payment_date,
+          paymentIndex * paymentFrequencyDays,
         );
 
         const daily = forecast.dailyBalances.find(
@@ -246,9 +247,9 @@ export function createPaymentPlan(
         payments.push({
           date,
           amount:
-            month === months - 1
+            paymentIndex === paymentsCount - 1
               ? option.total_payable -
-                installmentAmount * (months - 1)
+                installmentAmount * (paymentsCount - 1)
               : installmentAmount,
         });
       }

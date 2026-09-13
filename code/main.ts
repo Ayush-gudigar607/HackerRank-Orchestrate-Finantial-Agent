@@ -7,6 +7,11 @@ import { calculateAmountSafeToPay } from "./affordability";
 import { createPaymentPlan } from "./payment-plans";
 import { createSpendingPlan } from "./spending-plans";
 import { makeDecision } from "./decision-engine";
+import {
+  validateDecision,
+} from "./validator";
+
+
 
 function escapeCSV(value: string | number): string {
   const text = String(value);
@@ -65,7 +70,7 @@ async function main() {
     process.env.DATASET_DIR ?? "./dataset";
 
   const outputPath =
-    process.env.OUTPUT_PATH ?? "./output.csv";
+  process.env.OUTPUT_PATH ?? "./output-test.csv";
 
   console.log("Loading dataset...");
 
@@ -124,15 +129,41 @@ async function main() {
           requiredSavings,
         );
 
-      // 6. Combine everything into the final answer.
-      const decision = makeDecision(
-        state,
-        affordability,
-        paymentPlan,
-        spendingPlan,
-      );
+      // // 6. Combine everything into the final answer.
+      // const decision = makeDecision(
+      //   state,
+      //   affordability,
+      //   paymentPlan,
+      //   spendingPlan,
+      // );
 
-      results.push(decision);
+      // results.push(decision);
+
+      const decision = makeDecision(
+  state,
+  affordability,
+  paymentPlan,
+  spendingPlan,
+);
+
+const validationErrors = validateDecision(
+  request,
+  decision,
+);
+
+if (validationErrors.length > 0) {
+  console.error(
+    `Validation failed for ${request.request_id}`,
+  );
+
+  for (const error of validationErrors) {
+    console.error(
+      `  ${error.field}: ${error.message}`,
+    );
+  }
+}
+
+results.push(decision);
     } catch (error) {
       console.error(
         `Failed ${request.request_id}:`,

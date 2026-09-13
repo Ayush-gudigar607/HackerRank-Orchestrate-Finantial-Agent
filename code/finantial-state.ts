@@ -39,21 +39,9 @@ export function buildFinancialState(
     (event) => event.user_id === request.user_id,
   );
 
-  if(!events.length) {
-    throw new Error(
-      `No financial events found for user ${request.user_id}`,
-    );
-  }
-
   const paymentOptions = dataset.paymentOptions.filter(
     (option) => option.request_id === request.request_id,
   );
-
-  if(!paymentOptions.length) {
-    throw new Error(
-      `No payment options found for request ${request.request_id}`,
-    );
-  }
 
   const messages = dataset.messages.filter(
     (message) =>

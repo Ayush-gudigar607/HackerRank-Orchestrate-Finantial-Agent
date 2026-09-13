@@ -5,6 +5,7 @@ export interface Request {
   user_id: string;
   request_date: string;
   request_type: string;
+  request_status: string;
   requested_amount: number;
   desired_completion_date: string;
   allows_partial_payment: boolean;
@@ -39,8 +40,10 @@ export interface PaymentOption {
   payment_option_id: string;
   request_id: string;
   payment_method: string;
-  start_date: string;
-  recurring_interval: string;
+  payment_amount: number;
+  number_of_payments: number;
+  first_payment_date: string;
+  payment_frequency_days: number | null;
   fee: number;
   total_payable: number;
 }

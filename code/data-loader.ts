@@ -144,8 +144,10 @@ export async function loadDataset(datasetDir: string): Promise<Dataset> {
       payment_option_id: row.payment_option_id!,
       request_id: row.request_id!,
       payment_method: row.payment_method!,
-      start_date: row.start_date!,
-      recurring_interval: row.recurring_interval!,
+      payment_amount: number(row.payment_amount!),
+      number_of_payments: number(row.number_of_payments!),
+      first_payment_date: row.first_payment_date!,
+      payment_frequency_days: numberOrNull(row.payment_frequency_days!),
       fee: number(row.financing_fee!),
       total_payable: number(row.total_payable_amount!),
     }));
