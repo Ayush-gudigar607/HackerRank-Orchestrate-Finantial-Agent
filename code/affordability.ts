@@ -28,63 +28,13 @@ export function calculateAmountSafeToPay(
   const requestedAmount = state.request.requested_amount;
   const requestDate = state.request.request_date;
 
-  // First check if paying 0 is even safe (i.e., baseline forecast stays above min)
-  const zeroResult = simulatePayment(
-    state,
-    requestDate,
+  const minRequired = state.profile.minimum_balance_to_keep;
+  const maxBuffer = forecast.minimumBalance - minRequired;
+  const safeAmount = Math.max(
     0,
+    Math.min(requestedAmount, Math.floor(maxBuffer * 100) / 100),
   );
 
-  if (!zeroResult.safe) {
-    return {
-      amountSafeToPay: 0,
-      requestedAmount,
-      minimumBalanceAfterPayment: zeroResult.minBalance,
-      minimumBalanceDate: zeroResult.minDate,
-      isFullAmountSafe: false,
-    };
-  }
-
-  // Check if full amount is safe
-  const fullResult = simulatePayment(
-    state,
-    requestDate,
-    requestedAmount,
-  );
-
-  if (fullResult.safe) {
-    return {
-      amountSafeToPay: requestedAmount,
-      requestedAmount,
-      minimumBalanceAfterPayment: fullResult.minBalance,
-      minimumBalanceDate: fullResult.minDate,
-      isFullAmountSafe: true,
-    };
-  }
-
-  // Binary search for maximum safe amount (40 iterations guarantees < 0.0001 precision)
-  let lo = 0;
-  let hi = requestedAmount;
-
-  for (let iter = 0; iter < 40; iter++) {
-    if (hi - lo < 0.005) break;
-    const mid = (lo + hi) / 2;
-
-    const result = simulatePayment(
-      state,
-      requestDate,
-      mid,
-    );
-
-    if (result.safe) {
-      lo = mid;
-    } else {
-      hi = mid;
-    }
-  }
-
-  // Use lo (the highest known safe amount)
-  const safeAmount = Math.floor(lo * 100) / 100;
   const finalResult = simulatePayment(
     state,
     requestDate,
@@ -92,7 +42,7 @@ export function calculateAmountSafeToPay(
   );
 
   return {
-    amountSafeToPay: Math.max(0, Math.min(requestedAmount, safeAmount)),
+    amountSafeToPay: safeAmount,
     requestedAmount,
     minimumBalanceAfterPayment: finalResult.minBalance,
     minimumBalanceDate: finalResult.minDate,

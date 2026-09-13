@@ -161,58 +161,19 @@ function convertToHomeCurrency(
  * Only events that actually repeat on a pattern in the dataset are treated
  * as recurring - we don't invent patterns.
  */
-function detectRecurrenceInterval(
-  event: FinancialEvent,
-  allEvents: FinancialEvent[],
-): number | null {
-  // Find events with same category, direction, and similar description
-  const similar = allEvents.filter(
-    (e) =>
-      e.event_id !== event.event_id &&
-      e.user_id === event.user_id &&
-      e.category === event.category &&
-      e.direction === event.direction &&
-      e.status !== "cancelled" &&
-      e.status !== "canceled" &&
-      e.status !== "failed" &&
-      e.description === event.description,
-  );
-
-  if (similar.length < 2) return null;
-
-  // Sort by date
-  const dates = [...similar, event]
-    .map((e) => e.event_date)
-    .sort();
-
-  // Calculate intervals between consecutive occurrences
+function detectIntervalFromDates(dates: string[]): number | null {
+  if (dates.length < 2) return null;
   const intervals: number[] = [];
   for (let i = 1; i < dates.length; i++) {
     const diff = dateDiffDays(dates[i - 1]!, dates[i]!);
-    if (diff > 0) {
-      intervals.push(diff);
-    }
+    if (diff > 0) intervals.push(diff);
   }
-
-  if (intervals.length < 2) return null;
-
-  // Check if intervals are roughly consistent
-  const avgInterval =
-    intervals.reduce((s, v) => s + v, 0) / intervals.length;
-
-  // Allow 5-day tolerance for monthly patterns
-  const consistent = intervals.every(
-    (i) => Math.abs(i - avgInterval) <= 5,
-  );
-
-  if (!consistent) return null;
-
-  // Round to common periods
-  if (avgInterval >= 26 && avgInterval <= 35) return 30; // monthly
-  if (avgInterval >= 5 && avgInterval <= 9) return 7; // weekly
-  if (avgInterval >= 12 && avgInterval <= 16) return 14; // bi-weekly
-  if (avgInterval >= 85 && avgInterval <= 95) return 90; // quarterly
-
+  if (intervals.length === 0) return null;
+  const avg = intervals.reduce((s, v) => s + v, 0) / intervals.length;
+  if (avg >= 25 && avg <= 35) return 30;
+  if (avg >= 12 && avg <= 16) return 14;
+  if (avg >= 5 && avg <= 9) return 7;
+  if (avg >= 85 && avg <= 95) return 90;
   return null;
 }
 
@@ -263,7 +224,7 @@ function isDuplicateEvent(
 
 /**
  * Build a map of event_date -> net balance change for the forecast period.
- * Handles both one-time and recurring events.
+ * Handles both one-time and recurring events without multiplying historical clones.
  */
 function buildDailyChanges(
   state: FinancialState,
@@ -280,69 +241,150 @@ function buildDailyChanges(
       !isDuplicateEvent(event, state.events),
   );
 
+  // 1. One-time occurrences already scheduled in the forecast window
+  const scheduledDatesByEvent = new Set<string>();
   for (const event of usableEvents) {
     if (stoppedEvents.has(event.event_id)) continue;
 
-    const resolved = resolveEventAmount(state, event);
-    if (resolved.amount === null) continue;
-
-    let amount = resolved.amount;
-
-    // Apply reduction if applicable
-    if (reducedEvents.has(event.event_id)) {
-      amount = reducedEvents.get(event.event_id)!;
-    }
-
-    const amountHome = convertToHomeCurrency(
-      state.exchangeRates,
-      state.profile.currency,
-      amount,
-      event.currency,
-      event.settlement_date || event.event_date,
-    );
-
-    const signedAmount = isCredit(event)
-      ? amountHome
-      : -amountHome;
-
-    // Get the effective date for the event
     const effectiveDate = event.settlement_date || event.event_date;
-
-    // One-time: if within forecast window
     if (effectiveDate >= startDate && effectiveDate <= endDate) {
+      const resolved = resolveEventAmount(state, event);
+      if (resolved.amount === null) continue;
+
+      let amount = resolved.amount;
+      if (reducedEvents.has(event.event_id)) {
+        amount = reducedEvents.get(event.event_id)!;
+      }
+
+      const amountHome = convertToHomeCurrency(
+        state.exchangeRates,
+        state.profile.currency,
+        amount,
+        event.currency,
+        effectiveDate,
+      );
+
+      const signedAmount = isCredit(event) ? amountHome : -amountHome;
       changes.set(
         effectiveDate,
         (changes.get(effectiveDate) ?? 0) + signedAmount,
       );
+      scheduledDatesByEvent.add(`${event.category}|${effectiveDate}`);
     }
+  }
 
-    // Recurring: detect from history and project forward
-    const interval = detectRecurrenceInterval(
-      event,
-      state.events,
+  // 2. Group recurring events by series:
+  // For expenses: group by category and description
+  // For salary/income: group by category === 'salary' or isCredit(event)
+  const expenseSeriesMap = new Map<string, FinancialEvent[]>();
+  const incomeSeries: FinancialEvent[] = [];
+
+  for (const event of usableEvents) {
+    if (isCredit(event)) {
+      incomeSeries.push(event);
+    } else {
+      const key = `${event.category}|${event.description}`;
+      if (!expenseSeriesMap.has(key)) {
+        expenseSeriesMap.set(key, []);
+      }
+      expenseSeriesMap.get(key)!.push(event);
+    }
+  }
+
+  // Project expense series from latest event only
+  for (const [key, events] of expenseSeriesMap.entries()) {
+    events.sort((a, b) =>
+      (a.settlement_date || a.event_date).localeCompare(
+        b.settlement_date || b.event_date,
+      ),
     );
+    const dates = events.map((e) => e.settlement_date || e.event_date);
+    const interval = detectIntervalFromDates(dates);
 
     if (interval !== null) {
-      // Find the latest occurrence date
-      const lastDate = effectiveDate;
+      const latest = events[events.length - 1]!;
+      if (stoppedEvents.has(latest.event_id)) continue;
 
-      // Project forward from the last known occurrence
-      let nextDate = lastDate;
+      const resolved = resolveEventAmount(state, latest);
+      if (resolved.amount === null) continue;
 
-      // Advance to get occurrences within forecast window
-      while (nextDate < startDate) {
-        nextDate = addDays(nextDate, interval);
+      let amount = resolved.amount;
+      if (reducedEvents.has(latest.event_id)) {
+        amount = reducedEvents.get(latest.event_id)!;
       }
 
-      // If the one-time date already added this, skip the first occurrence
+      const amountHome = convertToHomeCurrency(
+        state.exchangeRates,
+        state.profile.currency,
+        amount,
+        latest.currency,
+        latest.settlement_date || latest.event_date,
+      );
+      const signedAmount = -amountHome;
+
+      let nextDate = latest.settlement_date || latest.event_date;
       while (nextDate <= endDate) {
-        if (nextDate !== effectiveDate) {
-          changes.set(
-            nextDate,
-            (changes.get(nextDate) ?? 0) + signedAmount,
-          );
-        }
         nextDate = addDays(nextDate, interval);
+        if (nextDate >= startDate && nextDate <= endDate) {
+          if (!scheduledDatesByEvent.has(`${latest.category}|${nextDate}`)) {
+            changes.set(
+              nextDate,
+              (changes.get(nextDate) ?? 0) + signedAmount,
+            );
+          }
+        }
+      }
+    }
+  }
+
+  // Project income/salary series from latest confirmed salary
+  if (incomeSeries.length >= 1) {
+    incomeSeries.sort((a, b) =>
+      (a.settlement_date || a.event_date).localeCompare(
+        b.settlement_date || b.event_date,
+      ),
+    );
+    const latestIncome = incomeSeries[incomeSeries.length - 1]!;
+    const desc = latestIncome.description.toLowerCase();
+
+    // Only project if not a "final" severance or terminated payroll
+    if (
+      !desc.includes("final") &&
+      !desc.includes("terminated") &&
+      !desc.includes("last")
+    ) {
+      const dates = incomeSeries.map(
+        (e) => e.settlement_date || e.event_date,
+      );
+      const interval = detectIntervalFromDates(dates) ?? 30; // default monthly for confirmed salary
+
+      const resolved = resolveEventAmount(state, latestIncome);
+      if (resolved.amount !== null && resolved.amount > 0) {
+        const amountHome = convertToHomeCurrency(
+          state.exchangeRates,
+          state.profile.currency,
+          resolved.amount,
+          latestIncome.currency,
+          latestIncome.settlement_date || latestIncome.event_date,
+        );
+
+        let nextDate =
+          latestIncome.settlement_date || latestIncome.event_date;
+        while (nextDate <= endDate) {
+          nextDate = addDays(nextDate, interval);
+          if (nextDate >= startDate && nextDate <= endDate) {
+            if (
+              !scheduledDatesByEvent.has(
+                `${latestIncome.category}|${nextDate}`,
+              )
+            ) {
+              changes.set(
+                nextDate,
+                (changes.get(nextDate) ?? 0) + amountHome,
+              );
+            }
+          }
+        }
       }
     }
   }
@@ -364,6 +406,23 @@ export function forecast90Days(
   const dailyBalances: DailyBalance[] = [];
 
   let balance = state.profile.current_balance;
+
+  // Reserve pending debits immediately from available balance
+  for (const e of state.events) {
+    if (e.status.trim().toLowerCase() === "pending" && !isCredit(e)) {
+      const r = resolveEventAmount(state, e);
+      if (r.amount !== null) {
+        balance -= convertToHomeCurrency(
+          state.exchangeRates,
+          state.profile.currency,
+          r.amount,
+          e.currency,
+          e.settlement_date || e.event_date,
+        );
+      }
+    }
+  }
+
   let minimumBalance = balance;
   let minimumBalanceDate = startDate;
 
