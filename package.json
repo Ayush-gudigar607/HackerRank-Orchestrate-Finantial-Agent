@@ -1,0 +1,15 @@
+{
+  "name": "hackerrank-orchestrate-september26-main",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "start": "bun run code/main.ts"
+  },
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^7"
+  }
+}
