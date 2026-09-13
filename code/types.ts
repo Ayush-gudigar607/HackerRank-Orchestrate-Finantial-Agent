@@ -50,3 +50,11 @@ export interface Message {
   message_date: string;
   message_text: string;
 }
+
+export interface ImageRecord {
+  image_id: string;
+  user_id: string;
+  request_id: string;
+  related_event_id: string;
+  image_path: string;
+}
