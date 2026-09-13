@@ -31,3 +31,13 @@ export interface FinancialEvent {
   status: string;
   linked_event_id: string;
 }
+
+export interface PaymentOption {
+  payment_option_id: string;
+  request_id: string;
+  payment_method: string;
+  start_date: string;
+  recurring_interval: string;
+  fee: number;
+  total_payable: number;
+}
