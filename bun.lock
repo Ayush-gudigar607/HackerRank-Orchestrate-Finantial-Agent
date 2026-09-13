@@ -6,6 +6,7 @@
       "name": "hackerrank-orchestrate-september26-main",
       "devDependencies": {
         "@types/bun": "latest",
+        "@types/node": "^22.20.2",
       },
       "peerDependencies": {
         "typescript": "^7",
