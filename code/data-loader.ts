@@ -39,10 +39,7 @@ function parseCSVLine(line: string): string[] {
   return result.map((value) => value.trim());
 }
 
-//this will return the row
-async function readCSV(path: string): Promise<Record<string, string>[]> {
-  const content = await readFile(path, "utf-8");
-
+export function parseCSV(content: string): Record<string, string>[] {
   const lines = content.split(/\r?\n/).filter((line) => line.trim().length > 0);
 
   if (lines.length === 0) {
@@ -62,6 +59,12 @@ async function readCSV(path: string): Promise<Record<string, string>[]> {
 
     return row;
   });
+}
+
+//this will return the row
+async function readCSV(path: string): Promise<Record<string, string>[]> {
+  const content = await readFile(path, "utf-8");
+  return parseCSV(content);
 }
 
 function number(value: string): number {
