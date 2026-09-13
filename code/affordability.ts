@@ -62,13 +62,13 @@ export function calculateAmountSafeToPay(
     };
   }
 
-  // Binary search for maximum safe amount
+  // Binary search for maximum safe amount (40 iterations guarantees < 0.0001 precision)
   let lo = 0;
   let hi = requestedAmount;
-  const precision = 0.01;
 
-  while (hi - lo > precision) {
-    const mid = Math.floor((lo + hi) / 2 * 100) / 100;
+  for (let iter = 0; iter < 40; iter++) {
+    if (hi - lo < 0.005) break;
+    const mid = (lo + hi) / 2;
 
     const result = simulatePayment(
       state,

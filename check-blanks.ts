@@ -16,6 +16,6 @@ for (const event of blank.slice(0, 10)) {
   console.log({
     event_id: event.event_id,
     event_type: event.event_type,
-    image_path: image?.image_path ?? "NO IMAGE",
+    image_id: image?.image_id ?? "NO IMAGE",
   });
 }
