@@ -104,3 +104,21 @@ export function buildFinancialState(
   };
 }
 
+export function getEventById(
+  state: FinancialState,
+  eventId: string,
+): FinancialEvent | undefined {
+  return state.events.find(
+    (event) => event.event_id === eventId,
+  );
+}
+
+export function getImageForEvent(
+  state: FinancialState,
+  eventId: string,
+): ImageRecord | undefined {
+  return state.images.find(
+    (image) => image.related_event_id === eventId,
+  );
+}
+

@@ -1,30 +1,33 @@
 import { loadDataset } from "./data-loader";
+import  {buildFinancialState} from "./finantial-state";
 
 const DATASET_DIR = "./dataset";
 
 async function main() {
   const dataset = await loadDataset(DATASET_DIR);
 
-  console.log("Dataset loaded successfully");
+  const request = dataset.requests[0];
 
-  console.log({
-    requests: dataset.requests.length,
-    profiles: dataset.profiles.length,
-    events: dataset.events.length,
-    paymentOptions: dataset.paymentOptions.length,
-    messages: dataset.messages.length,
-    images: dataset.images.length,
-    exchangeRates: dataset.exchangeRates.length,
-  });
+  if (!request) {
+    throw new Error("No requests found in the dataset");
+  }
 
-  console.log("\nFirst request:");
-  console.log(dataset.requests[0]);
+  const state= buildFinancialState(dataset, request);
 
-  console.log("\nFirst profile:");
-  console.log(dataset.profiles[0]);
+  if (!state) {
+    throw new Error(`Failed to build financial state for request ${request.request_id}`);
+  }
+
+
+   console.log("Request:", state.request.request_id);
+  console.log("User:", state.request.user_id);
+  console.log("Balance:", state.profile.current_balance);
+  console.log("Minimum balance:", state.profile.minimum_balance_to_keep);
+
+  console.log("Events:", state.events.length);
+  console.log("Payment options:", state.paymentOptions.length);
+  console.log("Messages:", state.messages.length);
+  console.log("Images:", state.images.length);
 }
 
-main().catch(error => {
-  console.error(error);
-  process.exit(1);
-});
+main().catch(console.error);
