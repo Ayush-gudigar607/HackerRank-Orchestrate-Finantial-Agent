@@ -20,3 +20,14 @@ export interface FinancialProfile {
   spending_preferences: string;
   payment_methods_user_will_consider: string;
 }
+
+export interface FinancialEvent {
+  event_id: string;
+  user_id: string;
+  event_date: string;
+  event_type: string;
+  amount: number | null;
+  currency: string;
+  status: string;
+  linked_event_id: string;
+}
