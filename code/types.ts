@@ -10,3 +10,13 @@ export interface Request {
   allows_partial_payment: boolean;
   request_text: string;
 }
+
+export interface FinancialProfile {
+  user_id: string;
+  currency: string;
+  current_balance: number;
+  minimum_balance_to_keep: number;
+  priorities: string;
+  spending_preferences: string;
+  payment_methods_user_will_consider: string;
+}
