@@ -25,3 +25,30 @@ function parseCSVLine(line: string): string[] {
     value.trim().replace(/^"|"$/g, "")
   );
 }
+
+
+export async function readCSV(path: string): Promise<Record<string, string>[]> {
+  const content = await readFile(path, "utf-8");
+
+  const lines = content
+    .split(/\r?\n/)
+    .filter(line => line.trim().length > 0);
+
+  if (lines.length === 0) {
+    return [];
+  }
+
+  const headers = parseCSVLine(lines[0]!);
+
+  return lines.slice(1).map(line => {
+    const values = parseCSVLine(line);
+
+    const row: Record<string, string> = {};
+
+    headers.forEach((header, index) => {
+      row[header] = values[index] ?? "";
+    });
+
+    return row;
+  });
+}
