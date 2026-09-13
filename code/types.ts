@@ -17,8 +17,11 @@ export interface FinancialProfile {
   current_balance: number;
   minimum_balance_to_keep: number;
   priorities: string;
-  spending_preferences: string;
+  expense_categories_to_protect: string;
+  expense_categories_user_is_willing_to_reduce: string;
+  expense_categories_user_is_willing_to_stop: string;
   payment_methods_user_will_consider: string;
+  max_installment_months: number | null;
 }
 
 export interface FinancialEvent {

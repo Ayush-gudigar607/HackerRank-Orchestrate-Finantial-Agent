@@ -114,14 +114,18 @@ export async function loadDataset(datasetDir: string): Promise<Dataset> {
 
   const profiles: FinancialProfile[] = rawProfiles.map(row => ({
     user_id: row.user_id!,
-    currency: row.currency!,
-    account_type: row.account_type!,
-    current_balance: number(row.current_balance!),
+    currency: row.home_currency!,
+    current_balance: number(row.current_available_balance!),
     minimum_balance_to_keep: number(row.minimum_balance_to_keep!),
-    priorities: row.priorities!,
-    spending_preferences: row.spending_preferences!,
+    priorities: row.financial_priorities!,
+    expense_categories_to_protect: row.expense_categories_to_protect!,
+    expense_categories_user_is_willing_to_reduce:
+      row.expense_categories_user_is_willing_to_reduce!,
+    expense_categories_user_is_willing_to_stop:
+      row.expense_categories_user_is_willing_to_stop!,
     payment_methods_user_will_consider:
       row.payment_methods_user_will_consider!,
+    max_installment_months: numberOrNull(row.max_installment_months!),
   }));
 
     const events: FinancialEvent[] = rawEvents.map(row => ({
@@ -142,8 +146,8 @@ export async function loadDataset(datasetDir: string): Promise<Dataset> {
       payment_method: row.payment_method!,
       start_date: row.start_date!,
       recurring_interval: row.recurring_interval!,
-      fee: number(row.fee!),
-      total_payable: number(row.total_payable!),
+      fee: number(row.financing_fee!),
+      total_payable: number(row.total_payable_amount!),
     }));
 
     const messages: Message[] = rawMessages.map(row => ({

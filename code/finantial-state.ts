@@ -68,12 +68,6 @@ export function buildFinancialState(
       ),
   );
 
-  if(!messages.length) {
-    throw new Error(
-      `No messages found for request ${request.request_id}`,
-    );
-  }
-
   const images = dataset.images.filter(
     (image) =>
       image.user_id === request.user_id &&
@@ -86,12 +80,6 @@ export function buildFinancialState(
         )
       ),
   );
-
-  if(!images.length) {
-    throw new Error(
-      `No images found for request ${request.request_id}`,
-    );
-  }
 
   return {
     request,
