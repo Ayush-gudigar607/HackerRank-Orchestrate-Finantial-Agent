@@ -41,3 +41,12 @@ export interface PaymentOption {
   fee: number;
   total_payable: number;
 }
+
+export interface Message {
+  message_id: string;
+  user_id: string;
+  request_id: string;
+  related_event_id: string;
+  message_date: string;
+  message_text: string;
+}
