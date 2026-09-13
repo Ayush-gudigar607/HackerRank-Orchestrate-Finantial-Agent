@@ -1,48 +1,30 @@
-import { readCSV } from "./data-loader";
+import { loadDataset } from "./data-loader";
 
 const DATASET_DIR = "./dataset";
 
 async function main() {
-  const requests = await readCSV(
-    `${DATASET_DIR}/requests.csv`
-  );
-
-  const profiles = await readCSV(
-    `${DATASET_DIR}/financial_profiles.csv`
-  );
-
-  const events = await readCSV(
-    `${DATASET_DIR}/financial_events.csv`
-  );
-
-  const paymentOptions = await readCSV(
-    `${DATASET_DIR}/request_payment_options.csv`
-  );
-
-  const messages = await readCSV(
-    `${DATASET_DIR}/messages.csv`
-  );
-
-  const images = await readCSV(
-    `${DATASET_DIR}/images.csv`
-  );
-
-  const exchangeRates = await readCSV(
-    `${DATASET_DIR}/exchange_rates.csv`
-  );
+  const dataset = await loadDataset(DATASET_DIR);
 
   console.log("Dataset loaded successfully");
 
-  console.log("Requests:", requests.length);
-  console.log("Profiles:", profiles.length);
-  console.log("Events:", events.length);
-  console.log("Payment options:", paymentOptions.length);
-  console.log("Messages:", messages.length);
-  console.log("Images:", images.length);
-  console.log("Exchange rates:", exchangeRates.length);
+  console.log({
+    requests: dataset.requests.length,
+    profiles: dataset.profiles.length,
+    events: dataset.events.length,
+    paymentOptions: dataset.paymentOptions.length,
+    messages: dataset.messages.length,
+    images: dataset.images.length,
+    exchangeRates: dataset.exchangeRates.length,
+  });
+
+  console.log("\nFirst request:");
+  console.log(dataset.requests[0]);
+
+  console.log("\nFirst profile:");
+  console.log(dataset.profiles[0]);
 }
 
 main().catch(error => {
-  console.error("Application failed:", error);
+  console.error(error);
   process.exit(1);
 });
